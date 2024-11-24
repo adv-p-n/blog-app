@@ -10,10 +10,10 @@ import authService from "../../appwrite/authService";
 const Header = () => {
   const authStatus = useSelector((state) => state.auth.status);
   const navigate = useNavigate();
-  const consoleLogUserData =()=>{
-    const userData= authService.getCurrentUSer()
-    console.log(userData)
-  }
+  const consoleLogUserData = () => {
+    const userData = authService.getCurrentUSer();
+    console.log(userData);
+  };
   const navItems = [
     {
       name: "Home",
@@ -55,8 +55,8 @@ const Header = () => {
               item.active ? (
                 <li key={item.name}>
                   <button
-                    className="inline-block px-6 py-2 duration-200 hover:bg-blue-200 rounded-full"
-                    onClick={()=>navigate(item.slug)}
+                    className="inline-block px-6 py-2 font-bold duration-200 hover:bg-blue-200 rounded-full"
+                    onClick={() => navigate(item.slug)}
                   >
                     {item.name}
                   </button>
@@ -68,8 +68,14 @@ const Header = () => {
                 <LogoutBtn />
               </li>
             )}
-            <li><button className="inline-block px-6 py-2 duration-200 hover:bg-blue-200 rounded-full"
-                    onClick={consoleLogUserData} >Console log User</button></li>
+            {/* <li>
+              <button
+                className="inline-block px-6 py-2 duration-200 hover:bg-blue-200 rounded-full"
+                onClick={consoleLogUserData}
+              >
+                Console log User
+              </button>
+            </li> */}
           </ul>
         </nav>
       </Container>

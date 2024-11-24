@@ -22,9 +22,9 @@ export class Service{
             return false;
         }
     }
-    async updatePost(slug,{title,content,imageUrl,status}){
+    async updatePost(slug,{title,content,featuredImage,status}){
         try {
-            return await this.databases.updateDocument(conf.appwriteDatabaseId,conf.appwriteCOllectionId,slug,{title,content,imageUrl,status});
+            return await this.databases.updateDocument(conf.appwriteDatabaseId,conf.appwriteCOllectionId,slug,{title,content,featuredImage,status});
         } catch (error) {
             console.log("Error: updateDocument--",error)
             return false;
@@ -77,7 +77,7 @@ export class Service{
     getFilePreview(fileId) {
         
         const previewUrl = this.storage.getFilePreview(conf.appwriteBucketId, fileId);
-        console.log("Preview URL:", previewUrl);
+        //console.log("Preview URL:", previewUrl);
       
         return previewUrl;
       }
