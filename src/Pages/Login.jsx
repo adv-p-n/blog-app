@@ -1,8 +1,11 @@
 import React from 'react'
+import LoginComponent from "../components/LoginComponent"
 
 const Login = () => {
   return (
-    <div>Login</div>
+    <div className='py-8'>
+      <LoginComponent />
+    </div>
   )
 }
 

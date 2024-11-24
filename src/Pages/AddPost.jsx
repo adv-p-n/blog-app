@@ -1,8 +1,14 @@
 import React from 'react'
+import Container from '../components/container/Container'
+import PostForm from '../components/postform/PostForm'
 
 const AddPost = () => {
-  return (
-    <div>AddPost</div>
+  return  (
+    <div className='py-6'>
+      <Container>
+        <PostForm />
+      </Container>
+    </div>
   )
 }
 

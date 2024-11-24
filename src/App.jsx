@@ -1,18 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import "./App.css";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import authService from "./appwrite/authService";
+import { login, logout } from "./Store/authSlice";
+import Header from "./components/header/Header";
+import Footer from "./components/footer/Footer";
+import { CircularProgress } from "@mui/material";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const navigate=useNavigate();
 
-  return (
-    <>
-      <h1 className="text-3xl font-bold underline text-blue-400 bg-orange-300">
-      Hello world!
-    </h1>
-    </>
-  )
+  useEffect(() => {
+    authService
+      .getCurrentUSer()
+      .then((userData) => {
+        if (userData) dispatch(login({ userData }));
+        else {
+          dispatch(logout());
+        }
+      })
+      .catch((error) => {
+        console.error("Authentication error:", error);
+        navigate("/login");
+      })
+      .finally(() => setLoading(false));
+  }, [dispatch]);
+  
+
+  return !loading ? (
+    <div className="min-h-screen flex flex-wrap content-between bg-gray-500">
+      <div className="w-full block">
+        <Header />
+        <main>
+          <Outlet />
+        </main>
+        <Footer />
+      </div>
+    </div>
+  ) : <CircularProgress />;
 }
 
-export default App
+export default App;
